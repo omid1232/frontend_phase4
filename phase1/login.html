@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Menu</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
+    
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="dark-mode" id="dark-mode-toggle">
+        <label for="dark-mode-toggle"class="toggle-label">
+            <span class="toggle-slider"></span>
+        </label>
+        <form>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <label for="check">I'm not robot</label>
+            <input type="checkbox" id="check" required><br>
+            <button class="button" onclick="goToPlayerPage()">Login as player</button>
+            <button class="button" onclick="goToDesginerPage()">Login as Designer</button>
+        </form>
+
+        <a href="#" class="signup-link">Don't have an account? Register here</a>
+    </div>
+    <script>
+        function goToPlayerPage() {
+            window.location.href = "player.html";
+        }
+
+        function goToDesignerPage() {
+            window.location.href = "Designer.html";
+        }
+    </script>
+</body>
