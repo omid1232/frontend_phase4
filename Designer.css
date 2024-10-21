@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+/* Header styling */
+header {
+    background-color: #4A90E2;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+/* Main layout */
+.container {
+    display: flex;
+    height: calc(100vh - 100px);
+}
+
+/* Sidebar menu */
+nav {
+    width: 250px;
+    background-color: #333;
+    padding: 20px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+nav a:hover {
+    background-color: #555;
+    padding-left: 15px;
+}
+
+/* Main content area */
+.content {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+}
+
+.content h2 {
+    color: #333;
+    font-size: 2rem;
+}
+
+.content p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* Logout button */
+.logout-btn {
+    margin-top: auto;
+    padding: 15px 0;
+    text-align: center;
+    background-color: #E74C3C;
+}
+
+.logout-btn a {
+    color: #fff;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.logout-btn a:hover {
+    background-color: #C0392B;
+    padding-left: 10px;
+}
