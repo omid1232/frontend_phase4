@@ -22,7 +22,7 @@
             <a href="#">Cateogries</a>
             <i class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
             <ul class="htmlCss-sub-menu sub-menu">
-              <li><a href="#">Create new category</a></li>
+              <li><a href="#createCategoryModal">Create new category</a></li>
               <li class="more">
                 <span><a href="#">Show cateogries</a>
                 <i class='bx bxs-chevron-right arrow more-arrow'></i>
@@ -47,4 +47,15 @@
     </div>
   </nav>
 </body>
+<div id="createCategoryModal" class="modal">
+  <div class="modal-content">
+    <a href="#" class="close">&times;</a>
+    <h2>Create New Category</h2>
+    <form id="createCategoryForm" action="#">
+      <label for="categoryName">Category Name:</label>
+      <input type="text" id="categoryName" name="categoryName" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
 </html>
