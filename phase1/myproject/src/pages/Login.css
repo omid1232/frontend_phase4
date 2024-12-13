@@ -1,0 +1,133 @@
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.login-container {
+    background-color: var(--container-bg-color);
+    width: 400px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+.login-container h2 {
+    font-weight: bold;
+    color: #4A90E2;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    transition: border 0.3s ease;
+    font-size: 16px;
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+
+.login-container input[type="checkbox"] {
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4A90E2;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: background-color 0.3s ease;
+}
+
+.signup-link {
+    display: block;
+    margin-top: 20px;
+    color: #4A90E2;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+:root {
+    --bg-color: #8fcbdb; /* Light mode background */
+    --text-color: #000000; /* Light mode text color */
+    --container-bg-color: #ffffff;
+}
+
+[data-theme="dark"] {
+    --bg-color: #001a3b; /* Dark mode background */
+    --text-color: #ffffff; /* Dark mode text color */
+    --container-bg-color: #000000;
+}
+
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#dark-mode-toggle {
+    position: absolute;
+    top: 10;
+    display: none;
+}
+
+.toggle-label {
+    width: 60px;
+    height: 30px;
+    background-color: lightgray;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+#dark-mode-toggle:checked + .toggle-label .toggle-slider {
+    transform: translateX(30px);
+}
+
+#dark-mode-toggle:checked + .toggle-label {
+    background-color: #4A90E2;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        width: 90%;
+        padding: 20px;
+    }
+}

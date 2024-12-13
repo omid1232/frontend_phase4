@@ -1,0 +1,28 @@
+/* Player Page Styles */
+.player-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .container {
+    display: flex;
+    flex: 1;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 40px;
+    background-color: white;
+  }
+  
+  .content h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .content p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  

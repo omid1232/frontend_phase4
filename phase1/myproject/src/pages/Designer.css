@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+.header {
+    background-color: #4A90E2;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 100px);
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    color: #fff;
+    width: 250px;
+    padding: 20px;
+}
+
+/* The navigation and logout button share this column */
+.navigation .navigation-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.navigation .navigation-link:hover {
+    background-color: #555;
+    padding-left: 15px;
+}
+
+.logout-btn {
+    margin-top: auto;
+    padding: 15px 0;
+    text-align: center;
+    background-color: #E74C3C;
+}
+
+.logout-btn a {
+    color: #fff;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.logout-btn a:hover {
+    background-color: #C0392B;
+    padding-left: 10px;
+}
+
+.content {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+}
+
+.content h2 {
+    color: #333;
+    font-size: 2rem;
+}
+
+.content p {
+    font-size: 1.2rem;
+    color: #666;
+}
+/* Designer.css */
+
+.manage-categories-button {
+    padding: 10px 20px;
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .manage-categories-button:hover {
+    background-color: #1c5f8a;
+  }
+  
