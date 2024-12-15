@@ -5,6 +5,7 @@
   "dependencies": {
     "boxicons": "^2.1.4",
     "cra-template": "1.2.0",
+    "isntal": "^0.0.1-security",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.0.2",

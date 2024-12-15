@@ -1,7 +1,24 @@
-import React from 'react';
-import './ManageCategories.css'; // Ensure this file is in the same directory
+import React, { useState, useEffect } from 'react';
+import './ManageCategories.css';
 
 const ManageCategories = () => {
+  const [categories, setCategories] = useState([]);
+
+  // Fetch categories from the backend
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/categories');
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <>
       <nav>
@@ -9,25 +26,25 @@ const ManageCategories = () => {
           <i className='bx bx-menu'></i>
           <div className="logo">Manage Categories</div>
           <div className="nav-links">
-            <div className="sidebar-logo">
-              <span className="logo-name">Manage Cateogries</span>
-              <i className='bx bx-x'></i>
-            </div>
             <ul className="links">
               <li>
-                <a href="#">Cateogries</a>
+                <a href="#">Categories</a>
                 <i className='bx bxs-chevron-down htmlcss-arrow arrow'></i>
                 <ul className="htmlCss-sub-menu sub-menu">
-                  <li><a href="#createCategoryModal">Create new category</a></li>
+                  <li>
+                    <a href="#createCategoryModal" className="modal-link">Create New Category</a>
+                  </li>
                   <li className="more">
                     <span>
-                      <a href="#">Show cateogries</a>
+                      <a href="#">Show Categories</a>
                       <i className='bx bxs-chevron-right arrow more-arrow'></i>
                     </span>
                     <ul className="more-sub-menu sub-menu">
-                      <li><a href="#">Scientific</a></li>
-                      <li><a href="#">historical</a></li>
-                      <li><a href="#">literature</a></li>
+                      {categories.map((category) => (
+                        <li key={category.id}>
+                          <a href="#">{category.name}</a>
+                        </li>
+                      ))}
                     </ul>
                   </li>
                 </ul>
@@ -47,17 +64,32 @@ const ManageCategories = () => {
       {/* Modal */}
       <div id="createCategoryModal" className="modal">
         <div className="modal-content">
-          <a href="#" className="close">&times;</a>
+          <button className="close" onClick={() => closeModal()}>&times;</button>
           <h2>Create New Category</h2>
-          <form id="createCategoryForm" action="#">
+          <form
+            id="createCategoryForm"
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert('Category created successfully!');
+              closeModal();
+            }}
+          >
             <label htmlFor="categoryName">Category Name:</label>
             <input type="text" id="categoryName" name="categoryName" required />
-            <button type="submit">Submit</button>
+            <button type="submit" className="submit-button">Submit</button>
           </form>
         </div>
       </div>
     </>
   );
+};
+
+// Helper function to close the modal
+const closeModal = () => {
+  const modal = document.getElementById('createCategoryModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
 };
 
 export default ManageCategories;

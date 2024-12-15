@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './scoreboard.css';
 import './player.css';
-import Scoreboard from '../components/Scoreboard'; // Ensure path is correct
+import Scoreboard from '../components/Scoreboard';
 
 const ShowScoreboard = () => {
-  const players = [
-    { name: 'Player1', score: 5000 },
-    { name: 'Player2', score: 4500 },
-    { name: 'Player3', score: 4200 },
-    // Add more players as needed
-  ];
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    const fetchScoreboard = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/scoreboard/');
+        const data = await response.json();
+        setPlayers(data);
+        console.log("hello")
+      } catch (error) {
+        console.error('Error fetching scoreboard:', error);
+      }
+    };
+
+    fetchScoreboard();
+  }, []);
 
   return (
     <div className="container">

@@ -1,5 +1,5 @@
-// CreateNewQuestion.js (Reference)
 import React from 'react';
+import './CreateNewQuestion.css'; // Ensure you include this file for styling
 
 const CreateNewQuestion = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -42,7 +42,7 @@ const CreateNewQuestion = ({ isOpen, onClose }) => {
             <option value="literature">Literature</option>
           </select>
 
-          <button type="submit">Submit</button>
+          <button type="submit" className="submit-button">Submit</button>
         </form>
       </div>
     </>

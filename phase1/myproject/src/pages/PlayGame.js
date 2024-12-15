@@ -1,37 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CurrentQuestion from '../components/CurrentQuestion';
 import PreviouslyAnswered from '../components/PreviouslyAnswered';
-import './PlayGame.css'; // Ensure player.css is in the same directory or adjust the path
+import './PlayGame.css';
 
 const PlayGame = () => {
-  const [answeredQuestions, setAnsweredQuestions] = useState([
-    {
-      question: "What is the capital of Germany?",
-      yourAnswer: "Berlin",
-      correctAnswer: "Berlin",
-      isCorrect: true
-    },
-    {
-      question: "What is the largest planet in our solar system?",
-      yourAnswer: "Saturn",
-      correctAnswer: "Jupiter",
-      isCorrect: false
-    }
-  ]);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]); // For previously answered questions
+  const [currentQuestion, setCurrentQuestion] = useState(''); // For the current question
 
-  const currentQuestion = "What is the capital of France?";
+  // Fetch previously answered questions and the current question from the backend
+  useEffect(() => {
+    const fetchGameData = async () => {
+      try {
+        const answeredResponse = await fetch('http://localhost:3001/api/play_game/answered_questions');
+        const answeredData = await answeredResponse.json();
+        setAnsweredQuestions(answeredData);
+        console.log(answeredData)
 
-  const handleSubmitAnswer = (answer) => {
-    // Here you would normally check the answer against the correct answer
-    // For demo purposes, let's say "Paris" is correct:
-    const isCorrect = (answer.toLowerCase() === "paris");
-    const newEntry = {
-      question: currentQuestion,
-      yourAnswer: answer,
-      correctAnswer: "Paris",
-      isCorrect: isCorrect
+        const questionResponse = await fetch('http://localhost:3001/api/play_game/current_question');
+        const questionData = await questionResponse.json();
+        setCurrentQuestion(questionData.question);
+      } catch (error) {
+        console.error('Error fetching game data:', error);
+      }
     };
-    setAnsweredQuestions([...answeredQuestions, newEntry]);
+
+    fetchGameData();
+  }, []);
+
+  // Submit an answer to the backend
+  const handleSubmitAnswer = async (answer) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/play_game/submit_answer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ answer })
+      });
+
+      const result = await response.json();
+
+      // Add the submitted question to the list of answered questions
+      const newEntry = {
+        question: currentQuestion,
+        yourAnswer: answer,
+        correctAnswer: result.correctAnswer,
+        isCorrect: result.isCorrect
+      };
+
+      setAnsweredQuestions([...answeredQuestions, newEntry]);
+
+      // Fetch the next question
+      if (result.nextQuestion) {
+        setCurrentQuestion(result.nextQuestion);
+      }
+    } catch (error) {
+      console.error('Error submitting answer:', error);
+    }
   };
 
   return (
