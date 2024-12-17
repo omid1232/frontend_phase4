@@ -65,4 +65,22 @@
   .submit-button:hover {
     background: #45a049;
   }
+  .options {
+    margin-bottom: 20px;
+  }
+  
+  .option-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .option-item input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .option-item input[type="radio"] {
+    margin-left: 10px;
+  }
   

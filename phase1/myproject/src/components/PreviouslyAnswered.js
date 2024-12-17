@@ -16,9 +16,9 @@ const PreviouslyAnswered = ({ answeredQuestions }) => {
         <tbody>
           {answeredQuestions.map((q, index) => (
             <tr key={index}>
-              <td>{q.question}</td>
-              <td>{q.yourAnswer}</td>
-              <td>{q.correctAnswer}</td>
+              <td>{q.question || 'Unknown'}</td>
+              <td>{q.yourAnswer || 'N/A'}</td>
+              <td>{q.correctAnswer || 'N/A'}</td>
               <td className={q.isCorrect ? 'correct' : 'incorrect'}>
                 {q.isCorrect ? 'Correct' : 'Incorrect'}
               </td>
@@ -29,19 +29,5 @@ const PreviouslyAnswered = ({ answeredQuestions }) => {
     </div>
   );
 };
-const answeredQuestionsData = [
-    {
-      question: "What is the capital of Germany?",
-      yourAnswer: "Berlin",
-      correctAnswer: "Berlin",
-      isCorrect: true
-    },
-    {
-      question: "What is the largest planet in our solar system?",
-      yourAnswer: "Saturn",
-      correctAnswer: "Jupiter",
-      isCorrect: false
-    }
-  ];
-  
+
 export default PreviouslyAnswered;
