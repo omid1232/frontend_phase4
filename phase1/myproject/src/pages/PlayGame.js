@@ -1,59 +1,74 @@
 import React, { useState, useEffect } from 'react';
 import CurrentQuestion from '../components/CurrentQuestion';
 import PreviouslyAnswered from '../components/PreviouslyAnswered';
-import './PlayGame.css';
 
 const PlayGame = () => {
-  const [answeredQuestions, setAnsweredQuestions] = useState([]); // For previously answered questions
-  const [currentQuestion, setCurrentQuestion] = useState(''); // For the current question
+  const [categories, setCategories] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  // Fetch previously answered questions and the current question from the backend
+  const playerId = localStorage.getItem('playerUsername'); // Get actual username
+
   useEffect(() => {
-    const fetchGameData = async () => {
+    const fetchCategories = async () => {
       try {
-        const answeredResponse = await fetch('http://localhost:3001/api/play_game/answered_questions');
-        const answeredData = await answeredResponse.json();
-        setAnsweredQuestions(answeredData);
-        console.log(answeredData)
-
-        const questionResponse = await fetch('http://localhost:3001/api/play_game/current_question');
-        const questionData = await questionResponse.json();
-        setCurrentQuestion(questionData.question);
+        const response = await fetch('http://localhost:3001/api/categories');
+        const data = await response.json();
+        setCategories(data);
       } catch (error) {
-        console.error('Error fetching game data:', error);
+        console.error('Error fetching categories:', error);
       }
     };
 
-    fetchGameData();
+    fetchCategories();
   }, []);
 
-  // Submit an answer to the backend
-  const handleSubmitAnswer = async (answer) => {
+  useEffect(() => {
+    const fetchAnsweredQuestions = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/api/play_game/answered_questions?playerId=${playerId}`
+        );
+        const data = await response.json();
+        setAnsweredQuestions(data);
+      } catch (error) {
+        console.error('Error fetching answered questions:', error);
+      }
+    };
+
+    fetchAnsweredQuestions();
+  }, [playerId]);
+
+  const fetchRandomQuestion = async (categoryId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/play_game/current_question?categoryId=${categoryId}`
+      );
+      const data = await response.json();
+      setCurrentQuestion(data);
+      setSelectedCategory(categoryId);
+    } catch (error) {
+      console.error('Error fetching question:', error);
+    }
+  };
+
+  const submitAnswer = async (answer) => {
     try {
       const response = await fetch('http://localhost:3001/api/play_game/submit_answer', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ answer })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          playerId, // Use actual username
+          questionId: currentQuestion.questionId,
+          answer,
+        }),
       });
 
       const result = await response.json();
+      setAnsweredQuestions([...answeredQuestions, result.result]);
 
-      // Add the submitted question to the list of answered questions
-      const newEntry = {
-        question: currentQuestion,
-        yourAnswer: answer,
-        correctAnswer: result.correctAnswer,
-        isCorrect: result.isCorrect
-      };
-
-      setAnsweredQuestions([...answeredQuestions, newEntry]);
-
-      // Fetch the next question
-      if (result.nextQuestion) {
-        setCurrentQuestion(result.nextQuestion);
-      }
+      fetchRandomQuestion(selectedCategory);
     } catch (error) {
       console.error('Error submitting answer:', error);
     }
@@ -69,9 +84,22 @@ const PlayGame = () => {
           <a href="/">Logout</a>
         </div>
       </nav>
+
       <div className="content">
-        <h2>Play Game</h2>
-        <CurrentQuestion question={currentQuestion} onSubmit={handleSubmitAnswer} />
+        <h2>Welcome, {playerId || 'Player'}!</h2>
+        <h3>Play Game</h3>
+        {!selectedCategory ? (
+          <div>
+            <h3>Select a Category</h3>
+            {categories.map((category) => (
+              <button key={category._id} onClick={() => fetchRandomQuestion(category._id)}>
+                {category.name}
+              </button>
+            ))}
+          </div>
+        ) : (
+          currentQuestion && <CurrentQuestion question={currentQuestion} onSubmit={submitAnswer} />
+        )}
         <PreviouslyAnswered answeredQuestions={answeredQuestions} />
       </div>
     </div>
