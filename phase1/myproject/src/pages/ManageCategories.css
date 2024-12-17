@@ -155,3 +155,38 @@ body {
 .close:hover {
   color: #216a9e;
 }
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none; /* Initially hidden */
+  position: absolute;
+  top: 100%; /* Align below the parent link */
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  border-radius: 4px;
+  z-index: 1000;
+  list-style: none;
+  padding: 10px 0;
+}
+
+.dropdown-menu li {
+  padding: 8px 15px;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f1f1f1;
+  color: #2980b9;
+}
+
+.links li:hover .dropdown-menu {
+  display: block; /* Show dropdown on hover */
+}
