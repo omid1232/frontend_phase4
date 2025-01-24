@@ -7,14 +7,14 @@ const CreateNewQuestion = ({ isOpen, onClose, onSubmit }) => {
     questionText: '',
     options: ['', '', '', ''], // Four options
     correctAnswer: '',
-    category: '',
+    categoryId: '',
     difficulty: 'easy',
   });
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/categories');
+        const response = await fetch('http://localhost:8080/api/categories');
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -33,11 +33,14 @@ const CreateNewQuestion = ({ isOpen, onClose, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Log the question data for debugging
+    console.log('Submitting Question Data:', questionData);
+  
     if (!questionData.correctAnswer) {
       alert('Please select a correct answer.');
       return;
     }
-    if (!questionData.category) {
+    if (!questionData.categoryId) {
       alert('Please select a category.');
       return;
     }
@@ -46,10 +49,11 @@ const CreateNewQuestion = ({ isOpen, onClose, onSubmit }) => {
       questionText: '',
       options: ['', '', '', ''],
       correctAnswer: '',
-      category: '',
+      categoryId: '', // Reset to ensure no lingering categoryId
       difficulty: 'easy',
     });
   };
+  
 
   if (!isOpen) return null;
 
@@ -107,19 +111,24 @@ const CreateNewQuestion = ({ isOpen, onClose, onSubmit }) => {
           </select>
 
           <label htmlFor="questionCategory">Category:</label>
-          <select
-            id="questionCategory"
-            value={questionData.category}
-            onChange={(e) => setQuestionData({ ...questionData, category: e.target.value })}
-            required
-          >
-            <option value="" disabled>Select Category</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          <label htmlFor="questionCategory">Category:</label>
+<select
+  id="questionCategory"
+  value={questionData.categoryId}
+  onChange={(e) => setQuestionData({ ...questionData, categoryId: e.target.value })}
+  required
+>
+  <option value="" disabled>
+    Select Category
+  </option>
+  {categories.map((category) => (
+    <option key={category.id} value={category.id}>
+      {category.name}
+    </option>
+  ))}
+</select>
+
+
 
           <button type="submit" className="submit-button">Submit</button>
         </form>

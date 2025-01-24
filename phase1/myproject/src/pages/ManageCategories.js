@@ -10,7 +10,7 @@ const ManageCategories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/categories');
+        const response = await fetch('http://localhost:8080/api/categories');
         if (!response.ok) {
           throw new Error('Failed to fetch categories');
         }
@@ -31,7 +31,7 @@ const ManageCategories = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3001/api/categories', {
+      const response = await fetch('http://localhost:8080/api/categories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: categoryName }),

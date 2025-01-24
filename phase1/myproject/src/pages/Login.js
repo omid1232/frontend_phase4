@@ -12,8 +12,8 @@ const Login = () => {
   const handleLogin = async (role) => {
     const endpoint =
       role === 'player'
-        ? 'http://localhost:3001/api/login/player'
-        : 'http://localhost:3001/api/login/designer';
+        ? 'http://localhost:8080/api/login/player'
+        : 'http://localhost:8080/api/login/designer';
   
     try {
       const response = await fetch(endpoint, {
@@ -23,16 +23,22 @@ const Login = () => {
       });
   
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json(); // Assume backend returns designerId or playerId
         alert(data.message);
   
-        // Save username in local storage
-        localStorage.setItem('playerUsername', username);
+        // Save username and designerId/playerId in localStorage
+        if (role === 'designer') {
+          console.log('Backend Response Designer ID:', data.designerId);
+          localStorage.setItem('designerId', data.designerId); // Save the ID in local storage
+        } else {
+          localStorage.setItem('playerId', data.playerId);
+        }
   
+        // Redirect to the appropriate dashboard
         navigate(`/${role}`);
       } else {
-        const data = await response.json();
-        setError(data.message);
+        const errorData = await response.json();
+        setError(errorData.message);
       }
     } catch (err) {
       console.error('Error during login:', err);
@@ -41,10 +47,13 @@ const Login = () => {
   };
   
 
+ 
+  
+
   const handleRegister = async (role) => {
     const endpoint = role === 'player'
-      ? 'http://localhost:3001/api/login/register/player'
-      : 'http://localhost:3001/api/login/register/designer';
+      ? 'http://localhost:8080/api/login/register/player'
+      : 'http://localhost:8080/api/login/register/designer';
 
     try {
       const response = await fetch(endpoint, {
