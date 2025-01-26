@@ -31,7 +31,9 @@ const Login = () => {
           console.log('Backend Response Designer ID:', data.designerId);
           localStorage.setItem('designerId', data.designerId); // Save the ID in local storage
         } else {
+          console.log('data ->', data)
           localStorage.setItem('playerId', data.playerId);
+          console.log("playerId", localStorage.getItem('playerId'))
         }
   
         // Redirect to the appropriate dashboard
