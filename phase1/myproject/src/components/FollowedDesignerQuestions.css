@@ -1,0 +1,38 @@
+.followed-designer-questions {
+    margin-top: 20px;
+  }
+  
+  .question-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .primary-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .primary-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .correct-answer {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .feedback {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+  

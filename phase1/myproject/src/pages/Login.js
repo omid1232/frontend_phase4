@@ -25,13 +25,14 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json(); // Assume backend returns designerId or playerId
         alert(data.message);
-  
+        console.log("data  is ",data);
         // Save username and designerId/playerId in localStorage
         if (role === 'designer') {
           console.log('Backend Response Designer ID:', data.designerId);
           localStorage.setItem('designerId', data.designerId); // Save the ID in local storage
         } else {
           localStorage.setItem('playerId', data.playerId);
+          console.log("player id set in:  ",data.playerId);
         }
   
         // Redirect to the appropriate dashboard
