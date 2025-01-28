@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './CreateNewQuestion.css'; // Ensure you include this file for styling
+import './CreateNewQuestion.css'; // Ensure this file is included for styling
 
 const CreateNewQuestion = ({ isOpen, onClose, onSubmit }) => {
   const [categories, setCategories] = useState([]);
@@ -35,7 +35,7 @@ const CreateNewQuestion = ({ isOpen, onClose, onSubmit }) => {
     e.preventDefault();
     // Log the question data for debugging
     console.log('Submitting Question Data:', questionData);
-  
+
     if (!questionData.correctAnswer) {
       alert('Please select a correct answer.');
       return;
@@ -49,88 +49,99 @@ const CreateNewQuestion = ({ isOpen, onClose, onSubmit }) => {
       questionText: '',
       options: ['', '', '', ''],
       correctAnswer: '',
-      categoryId: '', // Reset to ensure no lingering categoryId
+      categoryId: '',
       difficulty: 'easy',
     });
   };
-  
 
   if (!isOpen) return null;
 
   return (
     <>
       <div className="modal-backdrop" onClick={onClose}></div>
-      <div className="modal-content">
-        <button className="close-button" onClick={onClose}>
-          &times;
-        </button>
-        <h2>Create New Question</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="questionText">Question Description:</label>
-          <textarea
-            id="questionText"
-            value={questionData.questionText}
-            onChange={(e) => setQuestionData({ ...questionData, questionText: e.target.value })}
-            required
-          ></textarea>
+      <div className="modal-container">
+        <div className="modal-header">
+          <h2 className="modal-title">Create New Question</h2>
+          <button className="close-button" onClick={onClose}>
+            &times;
+          </button>
+        </div>
+        <form className="modal-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="questionText">Question Description:</label>
+            <textarea
+              id="questionText"
+              className="form-control"
+              value={questionData.questionText}
+              onChange={(e) => setQuestionData({ ...questionData, questionText: e.target.value })}
+              required
+            ></textarea>
+          </div>
 
-          <div className="options">
+          <div className="form-group">
+            <label>Options:</label>
             {questionData.options.map((option, index) => (
               <div key={index} className="option-item">
-                <label>
-                  Option {index + 1}:
-                  <input
-                    type="text"
-                    value={option}
-                    onChange={(e) => handleOptionChange(index, e.target.value)}
-                    required
-                  />
-                </label>
                 <input
-                  type="radio"
-                  name="correctAnswer"
+                  type="text"
+                  className="option-input"
+                  placeholder={`Option ${index + 1}`}
                   value={option}
-                  onChange={(e) => setQuestionData({ ...questionData, correctAnswer: e.target.value })}
-                  checked={questionData.correctAnswer === option}
+                  onChange={(e) => handleOptionChange(index, e.target.value)}
+                  required
                 />
-                Correct
+                <label className="correct-label">
+                  <input
+                    type="radio"
+                    name="correctAnswer"
+                    value={option}
+                    checked={questionData.correctAnswer === option}
+                    onChange={(e) => setQuestionData({ ...questionData, correctAnswer: e.target.value })}
+                  />
+                  Correct Answer
+                </label>
               </div>
             ))}
           </div>
 
-          <label htmlFor="difficultyLevel">Difficulty Level:</label>
-          <select
-            id="difficultyLevel"
-            value={questionData.difficulty}
-            onChange={(e) => setQuestionData({ ...questionData, difficulty: e.target.value })}
-            required
-          >
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
+          <div className="form-group">
+            <label htmlFor="difficultyLevel">Difficulty Level:</label>
+            <select
+              id="difficultyLevel"
+              className="form-control"
+              value={questionData.difficulty}
+              onChange={(e) => setQuestionData({ ...questionData, difficulty: e.target.value })}
+              required
+            >
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
 
-          <label htmlFor="questionCategory">Category:</label>
-          <label htmlFor="questionCategory">Category:</label>
-<select
-  id="questionCategory"
-  value={questionData.categoryId}
-  onChange={(e) => setQuestionData({ ...questionData, categoryId: e.target.value })}
-  required
->
-  <option value="" disabled>
-    Select Category
-  </option>
-  {categories.map((category) => (
-    <option key={category.id} value={category.id}>
-      {category.name}
-    </option>
-  ))}
-</select>
+          <div className="form-group">
+            <label htmlFor="questionCategory">Category:</label>
+            <select
+              id="questionCategory"
+              className="form-control"
+              value={questionData.categoryId}
+              onChange={(e) => setQuestionData({ ...questionData, categoryId: e.target.value })}
+              required
+            >
+              <option value="" disabled>
+                Select Category
+              </option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-
-
-          <button type="submit" className="submit-button">Submit</button>
+          <button type="submit" className="submit-button">
+            Submit
+          </button>
         </form>
       </div>
     </>

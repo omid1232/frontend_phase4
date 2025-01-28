@@ -8,12 +8,12 @@ const PlayGame = () => {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const playerId = localStorage.getItem('playerUsername'); // Get actual username
+  const playerId = localStorage.getItem('playerId'); // Get actual username
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/categories');
+        const response = await fetch('http://localhost:8080/api/categories');
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -27,11 +27,13 @@ const PlayGame = () => {
   useEffect(() => {
     const fetchAnsweredQuestions = async () => {
       try {
+        console.log('pid ->', playerId)
         const response = await fetch(
-          `http://localhost:3001/api/play_game/answered_questions?playerId=${playerId}`
+          `http://localhost:8080/api/players/${playerId}/answered`
         );
         const data = await response.json();
         setAnsweredQuestions(data);
+        console.log('data ->', data)
       } catch (error) {
         console.error('Error fetching answered questions:', error);
       }
@@ -43,7 +45,7 @@ const PlayGame = () => {
   const fetchRandomQuestion = async (categoryId) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/play_game/current_question?categoryId=${categoryId}`
+        `http://localhost:8080/api/play_game/current_question?categoryId=${categoryId}`
       );
       const data = await response.json();
       setCurrentQuestion(data);
@@ -55,7 +57,7 @@ const PlayGame = () => {
 
   const submitAnswer = async (answer) => {
     try {
-      const response = await fetch('http://localhost:3001/api/play_game/submit_answer', {
+      const response = await fetch('http://localhost:8080/api/play_game/submit_answer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -66,7 +68,7 @@ const PlayGame = () => {
       });
 
       const result = await response.json();
-      setAnsweredQuestions([...answeredQuestions, result.result]);
+      // setAnsweredQuestions([...answeredQuestions, result.result]);
 
       fetchRandomQuestion(selectedCategory);
     } catch (error) {
