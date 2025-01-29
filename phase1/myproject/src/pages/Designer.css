@@ -5,13 +5,13 @@ body {
     background-color: #f4f4f9;
 }
 
-.header {
+/* .header {
     background-color: #4A90E2;
     color: #fff;
     padding: 20px;
     text-align: center;
     font-size: 1.8rem;
-}
+} */
 
 .container {
     display: flex;
@@ -27,32 +27,17 @@ body {
     padding: 20px;
 }
 
-/* The navigation and logout button share this column */
-.navigation .navigation-link {
-    color: #fff;
-    text-decoration: none;
-    padding: 15px 0;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #444;
-}
-
 .navigation .navigation-link:hover {
     background-color: #555;
     padding-left: 15px;
 }
 
-.logout-btn {
-    margin-top: auto;
-    padding: 15px 0;
-    text-align: center;
-    background-color: #E74C3C;
-}
 
-.logout-btn a {
+/* .logout-btn a {
     color: #fff;
     font-size: 1.1rem;
     text-decoration: none;
-}
+} */
 
 .logout-btn a:hover {
     background-color: #C0392B;

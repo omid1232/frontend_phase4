@@ -1,9 +1,8 @@
-/* Logout Button Styles */
 .logout-btn {
     margin-top: auto;
     padding: 15px 0;
     text-align: center;
-    background-color: #E74C3C;
+    background-color: transparent;
 }
 
 .logout-btn a {
@@ -11,14 +10,17 @@
     font-size: 1.1rem;
     text-decoration: none;
     display: block;
-    width: 100px;
+    width: fit-content;
     margin: 0 auto;
-    border-radius: 5px;
-    padding: 10px 20px;
+    border-radius: 50px;
+    padding: 12px 24px;
     background-color: #E74C3C;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 3px 10px rgba(231, 76, 60, 0.4);
 }
 
 .logout-btn a:hover {
     background-color: #C0392B;
+    box-shadow: 0 6px 15px rgba(192, 57, 43, 0.5);
+    transform: scale(1.05);
 }

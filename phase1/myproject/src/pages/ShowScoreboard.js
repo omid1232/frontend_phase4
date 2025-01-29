@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './scoreboard.css';
+import Navigation from "../components/Navigation";
+
 
 const Scoreboard = () => {
+    const links = [
+  { text: "Home", href: "/player" },
+  { text: "Play Game", href: "/play_game" },
+  { text: "Scoreboard", href: "/scoreboard" },
+  ];
   const [players, setPlayers] = useState([]);
   console.log('players ->', players)
 
   useEffect(() => {
     const fetchTopPlayers = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/players');
+        const response = await fetch('http://localhost:8080/api/players/getSortedPlayers');
         const data = await response.json();
         setPlayers(data);
       } catch (error) {
@@ -21,14 +28,9 @@ const Scoreboard = () => {
 
   return (
     <div className="scoreboard-container">
-      <nav className="vertical-menu">
-        <a href="/player">Home</a>
-        <a href="/play_game">Play Game</a>
-        <a href="/scoreboard">Scoreboard</a>
-        <div className="logout-btn">
-          <a href="/">Logout</a>
-        </div>
-      </nav>
+      <div className="navigation">
+          <Navigation links={links} />
+      </div>
       <h2>Top Players</h2>
       <table className="score-table">
         <thead>

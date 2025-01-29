@@ -1,8 +1,11 @@
 .header {
-    background-color: #4A90E2;
-    color: white;
+    /* background-color: #6396cc; */
+    color: black;
+    font-family: 'Lora', serif;
+    font-size: xx-large;
     padding: 20px;
     text-align: center;
     font-size: 1.8rem;
-  }
+    border-radius: 20px;
+}
   

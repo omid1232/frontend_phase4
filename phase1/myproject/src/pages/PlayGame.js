@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import CurrentQuestion from '../components/CurrentQuestion';
+import Navigation from "../components/Navigation";
 import PreviouslyAnswered from '../components/PreviouslyAnswered';
 
 const PlayGame = () => {
+  const links = [
+    { text: "Home", href: "/player" },
+    { text: "Play Game", href: "/play_game" },
+    { text: "Scoreboard", href: "/scoreboard" },
+  ];
   const [categories, setCategories] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
@@ -78,14 +84,17 @@ const PlayGame = () => {
 
   return (
     <div className="container">
-      <nav className="vertical-menu">
+      {/* <nav className="vertical-menu">
         <a href="/player">Home</a>
         <a href="/play_game">Play Game</a>
         <a href="/scoreboard">Scoreboard</a>
         <div className="logout-btn">
           <a href="/">Logout</a>
         </div>
-      </nav>
+      </nav> */}
+      <div>
+        <Navigation links={links}/>
+      </div>
 
       <div className="content">
         <h2>Welcome, {playerId || 'Player'}!</h2>

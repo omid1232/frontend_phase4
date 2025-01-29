@@ -20,47 +20,6 @@ body {
   height: 100vh;
 }
 
-/* Vertical menu styling (consistent with previous pages) */
-.vertical-menu {
-  width: 200px;
-  background-color: #2c3e50;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
-
-.vertical-menu a {
-  text-decoration: none;
-  color: white;
-  padding: 12px;
-  background-color: #34495e;
-  margin-bottom: 10px;
-  text-align: center;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.1s ease;
-}
-
-.vertical-menu a:hover {
-  background-color: #1abc9c;
-  transform: translateY(-1px);
-}
-
-.logout-btn a {
-  background-color: #e74c3c;
-  display: block;
-  margin-top: auto;
-  text-align: center;
-  padding: 12px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.logout-btn a:hover {
-  background-color: #c0392b;
-}
-
-/* Content styling */
 .content {
   flex-grow: 1;
   padding: 40px;
@@ -75,10 +34,9 @@ body {
   text-align: center;
 }
 
-/* Scoreboard Container */
 .scoreboard-container {
   max-width: 800px;
-  margin: 40px auto; /* Add generous top and bottom space */
+  margin: 40px auto;
   background: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -89,7 +47,6 @@ body {
   margin-bottom: 30px;
 }
 
-/* Scoreboard table styling */
 .score-table {
   width: 100%;
   border-collapse: collapse;
@@ -130,7 +87,6 @@ body {
   border-bottom: none;
 }
 
-/* Scrollbar styling for content (optional) */
 .content::-webkit-scrollbar {
   width: 8px;
 }
@@ -145,7 +101,6 @@ body {
   background: #999;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 600px) {
   .scoreboard-container {
     margin: 20px auto;

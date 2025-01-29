@@ -1,5 +1,6 @@
 import React from 'react';
 import './Navigation.css'; // Menu-specific styles
+import LogoutButton from "../components/LogoutButton";
 
 const Navigation = ({ links }) => {
   return (
@@ -9,6 +10,7 @@ const Navigation = ({ links }) => {
           {link.text}
         </a>
       ))}
+      <LogoutButton />
     </nav>
   );
 };

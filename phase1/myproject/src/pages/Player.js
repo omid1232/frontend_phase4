@@ -1,15 +1,13 @@
 import React from "react";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import LogoutButton from "../components/LogoutButton";
 import FollowDesigner from "../components/FollowDesigner";
 import AnswerQuestions from "../components/AnswerQuestion";
-import FollowedDesignerQuestions from '../components/FollowedDesignerQuestions';
 import "./player.css";
 
 const Player = () => {
   const links = [
-    { text: "Home", href: "/" },
+    { text: "Home", href: "/player" },
     { text: "Play Game", href: "/play_game" },
     { text: "Scoreboard", href: "/scoreboard" },
   ];
@@ -18,7 +16,7 @@ const Player = () => {
     <div className="player-page">
       <Header title="Player Dashboard" />
 
-      <div className="container">
+      <div>
         {/* Left Side: Navigation */}
         <div className="navigation">
           <Navigation links={links} />
@@ -40,8 +38,6 @@ const Player = () => {
               <FollowDesigner />
             </div>
           </div>
-
-          <LogoutButton />
         </div>
       </div>
     </div>
