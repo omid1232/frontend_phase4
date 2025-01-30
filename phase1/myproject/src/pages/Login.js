@@ -5,7 +5,6 @@ import './Login.css';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -14,30 +13,33 @@ const Login = () => {
       role === 'player'
         ? 'http://localhost:8080/api/login/player'
         : 'http://localhost:8080/api/login/designer';
-  
+
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
-  
+
       if (response.ok) {
-        const data = await response.json(); // Assume backend returns designerId or playerId
+        const data = await response.json();
         alert(data.message);
-        console.log("data  is ",data);
-        // Save username and designerId/playerId in localStorage
+        console.log('Backend response:', data);
+
+        // Save IDs
         if (role === 'designer') {
-          console.log('Backend Response Designer ID:', data.designerId);
-          localStorage.setItem('designerId', data.designerId); // Save the ID in local storage
+          localStorage.setItem('designerId', data.designerId);
         } else {
-          console.log('data ->', data)
+          console.log("kirsss");
           localStorage.setItem('playerId', data.playerId);
-          console.log("player id set in:  ",data.playerId);
-          console.log("playerId", localStorage.getItem('playerId'))
         }
-  
-        // Redirect to the appropriate dashboard
+
+        // ***** Save the JWT token *****
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+        }
+
+        // Navigate to the dashboard
         navigate(`/${role}`);
       } else {
         const errorData = await response.json();
@@ -48,15 +50,13 @@ const Login = () => {
       setError('Something went wrong. Please try again.');
     }
   };
-  
-
- 
-  
 
   const handleRegister = async (role) => {
-    const endpoint = role === 'player'
-      ? 'http://localhost:8080/api/login/register/player'
-      : 'http://localhost:8080/api/login/register/designer';
+    // (No change needed unless your registration endpoint also returns a token)
+    const endpoint =
+      role === 'player'
+        ? 'http://localhost:8080/api/login/register/player'
+        : 'http://localhost:8080/api/login/register/designer';
 
     try {
       const response = await fetch(endpoint, {
