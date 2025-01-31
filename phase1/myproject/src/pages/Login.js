@@ -11,8 +11,8 @@ const Login = () => {
   const handleLogin = async (role) => {
     const endpoint =
       role === 'player'
-        ? 'http://localhost:8080/api/login/player'
-        : 'http://localhost:8080/api/login/designer';
+        ? 'http://backend-app:8080/api/login/player'
+        : 'http://backend-app:8080/api/login/designer';
 
     try {
       const response = await fetch(endpoint, {
@@ -55,8 +55,8 @@ const Login = () => {
     // (No change needed unless your registration endpoint also returns a token)
     const endpoint =
       role === 'player'
-        ? 'http://localhost:8080/api/login/register/player'
-        : 'http://localhost:8080/api/login/register/designer';
+        ? 'http://backend-app:8080/api/login/register/player'
+        : 'http://backend-app:8080/api/login/register/designer';
 
     try {
       const response = await fetch(endpoint, {

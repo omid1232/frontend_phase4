@@ -11,7 +11,7 @@ const PlayGame = () => {
     const fetchAnsweredQuestions = async () => {
       try {
         // IMPORTANT: Hit the *new* endpoint we just added in QuestionController
-        const response = await fetch(`http://localhost:8080/api/questions/answered_by_player/${playerId}`);
+        const response = await fetch(`http://backend-app:8080/api/questions/answered_by_player/${playerId}`);
         const data = await response.json();
         console.log(data);
         setAnsweredQuestions(data);

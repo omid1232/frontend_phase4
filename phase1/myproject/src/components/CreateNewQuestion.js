@@ -14,7 +14,7 @@ const CreateNewQuestion = ({ isOpen, onClose, onSubmit }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/categories');
+        const response = await fetch('http://backend-app:8080/api/categories');
         const data = await response.json();
         setCategories(data);
       } catch (error) {

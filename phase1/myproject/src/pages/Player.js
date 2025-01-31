@@ -21,7 +21,7 @@ const Player = () => {
     const fetchPlayerDetails = async () => {
       try {
         if (!playerId) return;
-        const response = await fetch(`http://localhost:8080/api/players/${playerId}`);
+        const response = await fetch(`http://backend-app:8080/api/players/${playerId}`);
         const data = await response.json();
         setPlayer(data);
       } catch (error) {

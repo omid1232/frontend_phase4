@@ -30,7 +30,7 @@ const ManageQuestions = () => {
     const fetchData = async () => {
       try {
         // 1) Fetch Categories
-        const categoryRes = await fetch('http://localhost:8080/api/categories');
+        const categoryRes = await fetch('http://backend-app:8080/api/categories');
         const categoryData = await categoryRes.json();
         setCategories(categoryData);
 
@@ -41,7 +41,7 @@ const ManageQuestions = () => {
           return;
         }
         const questionRes = await fetch(
-          `http://localhost:8080/api/designers/${designerId}/questions`
+          `http://backend-app:8080/api/designers/${designerId}/questions`
         );
         const questionData = await questionRes.json();
         setQuestions(Array.isArray(questionData) ? questionData : []);
@@ -70,7 +70,7 @@ const ManageQuestions = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/designers/${designerId}/questions/create`,
+        `http://backend-app:8080/api/designers/${designerId}/questions/create`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -128,7 +128,7 @@ const ManageQuestions = () => {
     }
     try {
       const res = await fetch(
-        `http://localhost:8080/api/questions/category/${selectedCategory}`
+        `http://backend-app:8080/api/questions/category/${selectedCategory}`
       );
       const data = await res.json();
       setRelatedQuestions(Array.isArray(data) ? data : []);

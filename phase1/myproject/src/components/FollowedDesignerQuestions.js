@@ -17,7 +17,7 @@ const FollowedDesignerQuestions = () => {
       }
       try {
         const response = await fetch(
-          `http://localhost:8080/api/players/${playerId}/followed-designers`
+          `http://backend-app:8080/api/players/${playerId}/followed-designers`
         );
         const data = await response.json();
         setFollowedDesigners(data);
@@ -36,7 +36,7 @@ const FollowedDesignerQuestions = () => {
     }
     try {
       const response = await fetch(
-        `http://localhost:8080/api/designers/${selectedDesigner}/questions`
+        `http://backend-app:8080/api/designers/${selectedDesigner}/questions`
       );
       const data = await response.json();
       setQuestions(data);
@@ -52,7 +52,7 @@ const FollowedDesignerQuestions = () => {
         return;
       }
       const response = await fetch(
-        `http://localhost:8080/api/players/${playerId}/answer`,
+        `http://backend-app:8080/api/players/${playerId}/answer`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

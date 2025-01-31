@@ -13,7 +13,7 @@ const AnswerQuestion = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/categories');
+        const response = await fetch('http://backend-app:8080/api/categories');
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -26,7 +26,7 @@ const AnswerQuestion = () => {
       if (!playerId) return;
 
       try {
-        const response = await fetch(`http://localhost:8080/api/players/${playerId}/answered-questions`);
+        const response = await fetch(`http://backend-app:8080/api/players/${playerId}/answered-questions`);
         const data = await response.json();
         setAnsweredQuestionIds(data);
         console.log("Answered Questions:", data);
@@ -45,7 +45,7 @@ const AnswerQuestion = () => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:8080/api/questions/category/${selectedCategory}`);
+      const response = await fetch(`http://backend-app:8080/api/questions/category/${selectedCategory}`);
       let data = await response.json();
 
       // Remove answered questions from the list
@@ -59,7 +59,7 @@ const AnswerQuestion = () => {
 
   const fetchRandomUnansweredQuestion = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/questions/all');
+      const response = await fetch('http://backend-app:8080/api/questions/all');
       console.log("hi   kiiiir");
       let data = await response.json();
 
@@ -80,7 +80,7 @@ const AnswerQuestion = () => {
   const handleAnswerSubmit = async (questionId, difficulty) => {
     try {
       const playerId = localStorage.getItem('playerId'); // Assuming playerId is stored in localStorage
-      const response = await fetch(`http://localhost:8080/api/players/${playerId}/answer`, {
+      const response = await fetch(`http://backend-app:8080/api/players/${playerId}/answer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ questionId, yourAnswer:answer }),

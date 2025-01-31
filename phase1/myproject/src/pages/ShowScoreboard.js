@@ -15,7 +15,7 @@ const Scoreboard = () => {
   useEffect(() => {
     const fetchTopPlayers = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/players/getSortedPlayers');
+        const response = await fetch('http://backend-app:8080/api/players/getSortedPlayers');
         const data = await response.json();
         setPlayers(data);
       } catch (error) {

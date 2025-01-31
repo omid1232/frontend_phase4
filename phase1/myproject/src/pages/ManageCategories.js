@@ -14,7 +14,7 @@ const ManageCategories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/categories');
+        const response = await fetch('http://backend-app:8080/api/categories');
         if (!response.ok) {
           throw new Error('Failed to fetch categories');
         }
@@ -62,7 +62,7 @@ const ManageCategories = () => {
   const goToDesigner = () => {
     // Replaces the current entry in the history stack
     navigate('/designer', { replace: true });
-    // or: window.location.replace('http://localhost:3000/designer');
+    // or: window.location.replace('http://backend-app:3000/designer');
   };
 
   return (
