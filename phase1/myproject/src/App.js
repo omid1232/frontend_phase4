@@ -17,7 +17,7 @@ function App() {
         <Route path="/designer" element={<Designer />} />
         <Route path="/manage_categories" element={<ManageCategories />} />
         <Route path="/manage_questions" element={<ManageQuestions />} />
-        <Route path="/play_game" element={<PlayGame />} />
+        <Route path="/answered" element={<PlayGame />} />
         <Route path="/scoreboard" element={<ShowScoreboard />} />
       </Routes>
     </Router>

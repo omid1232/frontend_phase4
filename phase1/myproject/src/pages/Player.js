@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import FollowDesigner from "../components/FollowDesigner";
@@ -8,37 +8,59 @@ import "./player.css";
 const Player = () => {
   const links = [
     { text: "Home", href: "/player" },
-    { text: "Play Game", href: "/play_game" },
+    { text: "Answered questions", href: "/answered" },
     { text: "Scoreboard", href: "/scoreboard" },
   ];
 
+  const playerId = localStorage.getItem("playerId");
+  const [player, setPlayer] = useState(null);
+  const questionContainerRef = useRef(null);
+
+  // Fetch Player Details (username, etc.)
+  useEffect(() => {
+    const fetchPlayerDetails = async () => {
+      try {
+        if (!playerId) return;
+        const response = await fetch(`http://localhost:8080/api/players/${playerId}`);
+        const data = await response.json();
+        setPlayer(data);
+      } catch (error) {
+        console.error("Error fetching player details:", error);
+      }
+    };
+
+    fetchPlayerDetails();
+  }, [playerId]);
+
+  // Scroll to the top when questions are loaded
+  const handleScrollToTop = () => {
+    if (questionContainerRef.current) {
+      questionContainerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <div className="player-page">
-      <Header title="Player Dashboard" />
+      <div className="main-container">
+        {/* Sidebar Navigation */}
+        <Navigation links={links} />
 
-      <div>
-        {/* Left Side: Navigation */}
-        <div className="navigation">
-          <Navigation links={links} />
-        </div>
+        {/* Main Content Area */}
+        <main className="content-area">
+          <h2 className="welcome-title">
+            Welcome back, {player?.username || "Player"}!
+          </h2>
 
-        {/* Main Content */}
-        <div className="content">
-          <h2>Welcome back, Player!</h2>
-          <p>Select an action below to continue:</p>
+          <section className="sections-container">
+            {/* Answer Questions */}
+            <AnswerQuestions onQuestionsLoaded={handleScrollToTop} />
 
-          <div className="main-sections">
-            {/* Answer Questions Section */}
-            <div className="answer-questions-container">
-              <AnswerQuestions />
+            {/* Follow Designers */}
+            <div className="follow-container" ref={questionContainerRef}>
+              <FollowDesigner onQuestionsLoaded={handleScrollToTop} />
             </div>
-
-            {/* Follow Designers Section */}
-            <div className="follow-designer-container">
-              <FollowDesigner />
-            </div>
-          </div>
-        </div>
+          </section>
+        </main>
       </div>
     </div>
   );

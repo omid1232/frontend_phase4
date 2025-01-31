@@ -1,39 +1,138 @@
-/* Navigation Styling */
-.navigation {
-    width: 200px; /* Optional: Increase width if needed */
-    height: 100%;
-    background: linear-gradient(180deg, #2c3e50, #3f78c4);
-    /* padding: 20px; */
-    display: flex;
-    flex-direction: column;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
+/******************************************************
+                SIDEBAR CONTAINER STYLES
+******************************************************/
+
+/* Main Sidebar */
+.sidebar {
+  /* Layout & Size */
+  width: 240px;                 /* or your preferred width */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  /* Appearance */
+  background: linear-gradient(180deg, #2c3e50 0%, #3f78c4 100%);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+  border-radius: 0px;       /*    Rounds the corners slightly */
+  padding: 1rem 0;             /* Vertical padding inside the sidebar */
+  
+  /* If you want it fixed on the left, uncomment:
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  */
 }
 
-/* Increased button size */
-.navigation-link {
-    text-decoration: none;
-    color: white;
-    padding: 18px 24px; /* Increased padding for bigger boxes */
-    background-color: #7c6a197c;
-    margin-bottom: 16px; /* Adjusted margin for better spacing */
-    margin: 8px;
-    width: 150px;
-    text-align: center;
-    border-radius: 10px; /* Slightly rounded corners */
-    font-weight: 500;
-    letter-spacing: 0.9px;
-    transition: all 0.3s ease;
-    display: flex;
+/* Top section (brand, avatar, etc.) */
+.sidebar-top {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.brand {
+  color: #ecf0f1;
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/******************************************************
+                LINK STYLES
+******************************************************/
+
+/* Links container */
+.sidebar-links {
+  /* Flex grows to fill space between top & bottom */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Individual Link */
+.sidebar-link {
+  display: block;
+  width: 80%;
+  margin: 0.4rem auto;
+  padding: 0.75rem 1rem;
+
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ecf0f1;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 8px;
+
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  opacity: 0.9;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 1;
+}
+
+/******************************************************
+                BOTTOM SECTION STYLES
+******************************************************/
+
+.sidebar-bottom {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* If you want a distinct look for the logout button, you can override here:
+.sidebar-bottom button {
+  background-color: #e74c3c;
+}
+*/
+
+/******************************************************
+                RESPONSIVE ADJUSTMENTS
+******************************************************/
+
+/* Slightly narrower for medium screens */
+@media screen and (max-width: 992px) {
+  .sidebar {
+    width: 200px;
+  }
+}
+
+/* If you want the sidebar to collapse to the top on small screens,
+   this modifies layout so it becomes a horizontal bar */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    border-radius: 0;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
+    min-height: auto;
+    padding: 0.5rem 1rem;
+  }
 
-/* .navigation-link:hover {
-    background: #4f5863;
-    box-shadow: 0 4px 15px rgba(108, 168, 156, 0.5);
-    transform: translateY(-2px);
-} */
+  .sidebar-top,
+  .sidebar-links,
+  .sidebar-bottom {
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar-links {
+    flex-grow: 0;
+    flex-direction: row;
+  }
+
+  .sidebar-link {
+    width: auto;
+    margin: 0 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+}

@@ -5,10 +5,10 @@ import Navigation from "../components/Navigation";
 
 const Scoreboard = () => {
     const links = [
-  { text: "Home", href: "/player" },
-  { text: "Play Game", href: "/play_game" },
-  { text: "Scoreboard", href: "/scoreboard" },
-  ];
+      { text: "Home", href: "/player" },
+      { text: "Answered questions", href: "/answered" },
+      { text: "Scoreboard", href: "/scoreboard" },
+    ];
   const [players, setPlayers] = useState([]);
   console.log('players ->', players)
 

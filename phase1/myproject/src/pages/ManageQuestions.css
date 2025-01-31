@@ -110,205 +110,437 @@ nav a:hover, nav button:hover {
   background-color: #2980b9;
   color: #fff;
 }
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* Modal Styles */
-.modal-backdrop {
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* ---------- HEADER (Fixed) ---------- */
+.mq-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 999;
-}
-
-.modal-content {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  width: 95%;
-  max-width: 400px;
-  padding: 30px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  border-radius: 8px;
-  text-align: left;
+  background-color: #2980b9;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
 }
 
-.modal-content h2 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: #2980b9;
+.mq-title {
+  color: #fff;
+  font-size: 1.8rem;
   font-weight: 600;
+  text-align: center;
 }
 
-.modal-content label {
-  font-size: 14px;
-  color: #333;
-  display: block;
-  margin: 10px 0 5px;
+.mq-button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.modal-content textarea,
-.modal-content input[type="text"],
-.modal-content select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
+/* Buttons */
+.primary-btn,
+.secondary-btn {
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
   border-radius: 4px;
-  font-size: 14px;
+  color: #fff;
 }
 
-.modal-content button[type="submit"] {
+.primary-btn {
+  background-color: #1abc9c;
+}
+
+.primary-btn:hover {
+  background-color: #16a085;
+}
+
+.secondary-btn {
+  background-color: #34495e;
+}
+
+.secondary-btn:hover {
+  background-color: #2c3e50;
+}
+
+/* ---------- QUESTIONS CONTAINER ---------- */
+.questions-container {
+  margin-top: 80px; /* Ensures it starts below the header */
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* The scrollable card */
+.questions-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 900px;
+  height: 500px; /* Fixed height */
+  overflow-y: auto; /* Enables scrolling inside the card */
+  padding: 20px;
+}
+
+.questions-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.questions-card::-webkit-scrollbar-thumb {
+  background-color: #2980b9;
+  border-radius: 4px;
+}
+
+/* ---------- QUESTION LIST ---------- */
+.no-questions-msg {
+  font-size: 1.1rem;
+  text-align: center;
+  color: #7f8c8d;
+}
+
+/* Question List */
+.questions-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Individual Question Card */
+.question-card {
+  background: #f9f9f9;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Question Header */
+.q-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.q-text,
+.q-category {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Options */
+.q-options ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.option-indicator {
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  border: 1px solid #2980b9;
+  border-radius: 50%;
+}
+
+.correct .option-indicator {
+  background-color: #2980b9;
+}
+
+/* ---------- RESPONSIVENESS ---------- */
+@media (max-width: 768px) {
+  .mq-title {
+    font-size: 1.4rem;
+  }
+
+  .questions-card {
+    width: 95%;
+    height: 450px; /* Adjusted for smaller screens */
+  }
+}
+
+/* Buttons */
+.primary-btn,
+.secondary-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  color: #fff;
+}
+
+.primary-btn {
+  background-color: #1abc9c;
+}
+
+.primary-btn:hover {
+  background-color: #16a085;
+}
+
+.secondary-btn {
+  background-color: #34495e;
+}
+
+.secondary-btn:hover {
+  background-color: #2c3e50;
+}
+
+/* ---------- MAIN CONTENT ---------- */
+.mq-content {
+  margin-top: 1200px; 
+  padding: 20px;
+}
+
+.no-questions-msg {
+  font-size: 1.1rem;
+  font-style: italic;
+  text-align: center;
+  margin-top: 2rem;
+  color: #7f8c8d;
+}
+
+/* The list of question "cards" */
+.questions-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.question-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.q-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.q-text,
+.q-category {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.cat-name {
+  font-style: italic;
+  color: #7f8c8d;
+}
+
+.q-options ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.option-indicator {
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  border: 1px solid #2980b9;
+  border-radius: 50%;
+}
+
+.correct .option-indicator {
+  background-color: #2980b9;
+}
+
+/* ---------- LINK BACK TO MAIN MENU ---------- */
+.back-menu {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.menu-link {
+  display: inline-block;
+  color: #2980b9;
+  text-decoration: none;
+  border: 1px solid #2980b9;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.menu-link:hover {
   background-color: #2980b9;
   color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.modal-content button[type="submit"]:hover {
-  background-color: #216a9e;
-}
-
-.modal-content .close-button {
-  background: none;
-  border: none;
-  color: #2980b9;
-  font-size: 20px;
-  font-weight: bold;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  cursor: pointer;
-}
-
-.modal-content .close-button:hover {
-  color: #216a9e;
-}
-
-/* Options Section in Modal */
-.modal-content .options {
-  margin-bottom: 15px;
-}
-
-.modal-content .options label {
-  display: inline-block;
-  margin-right: 10px;
-  margin-top: 10px;
-  font-weight: 500;
-}
-
-/* Additional Responsive Styles */
-@media (max-width: 600px) {
-  nav .title {
-    font-size: 20px;
-  }
-
-  nav ul li {
-    margin: 0 10px;
-  }
-
-  .content-container h1 {
-    font-size: 1.8rem;
-  }
-
-  .content-container p {
-    font-size: 0.9rem;
-  }
-
-  .modal-content {
-    padding: 20px;
-  }
-  /* Updated styles for buttons */
-button {
-  background-color: #007BFF; /* Modern blue button */
-  color: white;
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-}
-
-/* Close button in modal */
-.close-button {
-  background-color: transparent;
-  color: #555;
-  font-size: 24px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 10px;
-}
-
-.close-button:hover {
-  color: red;
-}
-
-/* Modal backdrop */
-.modal-backdrop {
+/* ---------- MODALS ---------- */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Dark transparent overlay */
-  z-index: 999;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999; /* Ensure it's on top of everything */
 }
 
-/* Modal content */
-.modal-content {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  width: 500px;
-  margin: 50px auto;
+.modal-body {
+  background-color: #fff;
+  width: 90%;
+  max-width: 550px;
+  border-radius: 8px;
   position: relative;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  animation: fadeInDown 0.3s ease forwards;
 }
 
-/* List of related questions */
-.related-questions-list ul {
-  padding: 0;
-  list-style-type: none;
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.related-questions-list li {
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
 }
 
-.related-questions-list li:hover {
-  background: #f9f9f9;
+.close-btn:hover {
+  color: #333;
 }
 
-/* Correct answer blue circle */
-.correct-circle {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: blue;
-  margin-right: 8px;
+/* Form in create-new-question modal */
+.create-modal-title {
+  margin-bottom: 1rem;
+  color: #2980b9;
 }
 
+.modal-form .form-group {
+  margin-bottom: 1rem;
 }
+
+.modal-form .form-control {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.option-input {
+  flex: 1;
+  margin-right: 10px;
+  padding: 0.4rem;
+}
+
+.correct-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+}
+
+.submit-button {
+  background-color: #1abc9c;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #16a085;
+}
+
+/* ---------- RELATED QUESTIONS MODAL ---------- */
+.related-questions-results {
+  margin-top: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.related-questions-results ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.related-q-item {
+  background: #fdfdfd;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.rq-options {
+  margin-top: 0.5rem;
+}
+
+.rq-options ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.rq-options .option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.no-related-msg {
+  color: #7f8c8d;
+  font-style: italic;
+}
+

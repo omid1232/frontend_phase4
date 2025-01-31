@@ -1,5 +1,5 @@
 import React from 'react';
-import './ManageQuestions.css'; 
+// import './ManageQuestions.css'; 
 
 const ManageQuestionsNav = () => {
   return (

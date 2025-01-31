@@ -6,6 +6,7 @@ const FollowDesigner = () => {
   const [followedDesignerIds, setFollowedDesignerIds] = useState([]);
   const [selectedDesignerQuestions, setSelectedDesignerQuestions] = useState([]);
   const [selectedDesigner, setSelectedDesigner] = useState(null);
+
   const playerId = localStorage.getItem("playerId");
 
   useEffect(() => {
@@ -40,11 +41,14 @@ const FollowDesigner = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8080/api/players/${playerId}/follow`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ designerId }),
-      });
+      const response = await fetch(
+        `http://localhost:8080/api/players/${playerId}/follow`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ designerId }),
+        }
+      );
 
       if (response.ok) {
         setFollowedDesignerIds((prev) => [...prev, designerId]);
@@ -59,7 +63,9 @@ const FollowDesigner = () => {
 
   const handleFetchQuestions = async (designerId, designerName) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/designers/${designerId}/questions`);
+      const response = await fetch(
+        `http://localhost:8080/api/designers/${designerId}/questions`
+      );
       const questions = await response.json();
       setSelectedDesigner(designerName);
       setSelectedDesignerQuestions(questions);
@@ -69,69 +75,73 @@ const FollowDesigner = () => {
   };
 
   return (
-    <div className="follow-designer-container">
-      <h2>Follow Designers</h2>
-      <ul>
-        {designers.map((designer) => (
-          <li key={designer.id} className="designer-item">
-            <span>{designer.username}</span>
-            <button
-              className={`follow-button ${
-                followedDesignerIds.includes(designer.id) ? "followed" : ""
-              }`}
-              disabled={followedDesignerIds.includes(designer.id)}
-              onClick={() => handleFollow(designer.id)}
-            >
-              {followedDesignerIds.includes(designer.id) ? "Followed" : "Follow"}
-            </button>
-            {followedDesignerIds.includes(designer.id) && (
-              <button
-                className="view-questions-button"
-                onClick={() => handleFetchQuestions(designer.id, designer.username)}
-              >
-                View Questions
-              </button>
-            )}
-          </li>
-        ))}
+    <div className="follow-designer-section">
+      <h3 className="section-heading">Follow Designers</h3>
+
+      <ul className="designer-list">
+        {designers.map((designer) => {
+          const isFollowed = followedDesignerIds.includes(designer.id);
+          return (
+            <li key={designer.id} className="designer-card">
+              <div className="designer-info">
+                <span className="designer-name">{designer.username}</span>
+                <div className="designer-actions">
+                  <button
+                    className={`follow-button ${isFollowed ? "followed" : ""}`}
+                    disabled={isFollowed}
+                    onClick={() => handleFollow(designer.id)}
+                  >
+                    {isFollowed ? "Followed" : "Follow"}
+                  </button>
+                  {isFollowed && (
+                    <button
+                      className="view-questions-button"
+                      onClick={() =>
+                        handleFetchQuestions(designer.id, designer.username)
+                      }
+                    >
+                      View Questions
+                    </button>
+                  )}
+                </div>
+              </div>
+            </li>
+          );
+        })}
       </ul>
 
-      {/* Show questions of the selected designer */}
+      {/* Display questions from the selected designer */}
       {selectedDesigner && (
         <div className="designer-questions">
-          <h3>Questions by {selectedDesigner}</h3>
-          <ul>
-            {selectedDesignerQuestions.length > 0 ? (
-              selectedDesignerQuestions.map((question) => (
+          <h4 className="questions-heading">
+            Questions by <span className="selected-designer">{selectedDesigner}</span>
+          </h4>
+          {selectedDesignerQuestions.length > 0 ? (
+            <ul className="question-list">
+              {selectedDesignerQuestions.map((question) => (
                 <li key={question.id} className="question-item">
-                  <p>
+                  <p className="question-text">
                     <strong>Question:</strong> {question.questionText}
                   </p>
-                  <ul>
-                    {question.options.map((option, index) => (
-                      <li key={index} className="question-option">
-                        <span
-                          style={{
-                            width: "12px",
-                            height: "12px",
-                            borderRadius: "50%",
-                            backgroundColor:
-                              option === question.correctAnswer ? "blue" : "transparent",
-                            marginRight: "8px",
-                            border: "1px solid blue",
-                            display: "inline-block",
-                          }}
-                        ></span>
-                        {option}
-                      </li>
-                    ))}
+                  <ul className="option-list">
+                    {question.options.map((option, index) => {
+                      const isCorrect = option === question.correctAnswer;
+                      return (
+                        <li key={index} className="question-option">
+                          <span
+                            className={`option-bullet ${isCorrect ? "correct" : ""}`}
+                          ></span>
+                          {option}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </li>
-              ))
-            ) : (
-              <p>No questions available from this designer.</p>
-            )}
-          </ul>
+              ))}
+            </ul>
+          ) : (
+            <p>No questions available from this designer.</p>
+          )}
         </div>
       )}
     </div>
